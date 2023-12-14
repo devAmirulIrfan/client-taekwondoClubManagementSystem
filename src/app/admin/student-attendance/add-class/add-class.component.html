@@ -1,1 +1,18 @@
-<p>add-class works!</p>
+<div class="row mt-5">
+    <div class="col">
+        <div class="row mt-1 mb-3">
+            <div class="d-inline col-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Choose class date</mat-label>
+                    <input matInput [matDatepicker]="picker" class="w-100" formControlName="birthDate">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="d-inline col">
+                <button mat-raised-button color="primary">Search Class</button>
+            </div>
+        </div>
+    </div>
+</div>
