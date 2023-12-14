@@ -28,6 +28,7 @@ import {MatCardModule} from '@angular/material/card';
 import { StudentRecordManagementQrModalComponent } from './student-record-management/student-record-management-qr-modal/student-record-management-qr-modal.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import jsPDF from 'jspdf';
+import { AddClassComponent } from './student-attendance/add-class/add-class.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import jsPDF from 'jspdf';
     StudentRecordManagementModalComponent,
     ParentRecordManagementComponent,
     ParentRecordManagementModalComponent,
-    StudentRecordManagementQrModalComponent
+    StudentRecordManagementQrModalComponent,
+    AddClassComponent
   ],
   imports: [
     CommonModule,
