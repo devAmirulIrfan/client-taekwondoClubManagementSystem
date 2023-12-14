@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StudentRecordManagementComponent } from './student-record-management/student-record-management.component';
 import { AdminComponent } from './admin.component';
 import { ParentRecordManagementComponent } from './parent-record-management/parent-record-management.component';
+import { AddClassComponent } from './student-attendance/add-class/add-class.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
     {
       path: 'student-record-management', 
       component: StudentRecordManagementComponent
+    },
+    {
+      path: 'add-new-class',
+      component: AddClassComponent
     }
   ]
   }
