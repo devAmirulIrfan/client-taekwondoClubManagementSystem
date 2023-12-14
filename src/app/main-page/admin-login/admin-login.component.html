@@ -1,0 +1,31 @@
+<div class="row d-flex justify-content-center align-items-center vh-100 bg-light">
+    <div class="col-md-4">
+        <div class="card shadow-lg rounded border-0 vh-75 mx-5">
+            <div class="card-body d-flex justify-content-center">
+                <div class="row my-5 mx-2">
+                    <div class="col">
+                        <form [formGroup]="adminLoginForm">
+                            <div class="row">
+                                <div class="col">
+                                    <h3><span>e-mail &nbsp;<mat-icon> email</mat-icon></span></h3>
+                                    <input class="form-control" type="text" formControlName="username">
+                                </div>
+                            </div>
+
+                            <div class="row mt-5">
+                                <div class="col">
+                                    <h3><span>password &nbsp;<mat-icon> vpn_key</mat-icon></span></h3>
+                                    <input class="form-control" type="password" formControlName="password">
+                                </div>
+                            </div>
+
+                           
+                                    <button class="float-end mt-5 btn btn-primary" (click)="login()">Login</button>
+                               
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

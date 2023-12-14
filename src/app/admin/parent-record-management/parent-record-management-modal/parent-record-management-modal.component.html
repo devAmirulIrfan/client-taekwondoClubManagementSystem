@@ -1,0 +1,95 @@
+<div class="row">
+    <h1 mat-dialog-title>Add New parent Record</h1>
+
+    <form [formGroup]="parentRecordForm">
+        <div mat-dialog-content>
+
+            <div class="row mt-1 mb-3">
+                <div class="col">
+                    <p>Parent Name</p>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Enter Parent Name</mat-label>
+                        <input matInput placeholder="Parent Name" class="w-100" formControlName="parentName">
+                        <mat-hint>*Required</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row mt-1 mb-3">
+                <p>Center</p>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Select</mat-label>
+                        <mat-select formControlName="centerId">
+                        <mat-option *ngFor="let center of data.centerList" [value]="center.id">
+                            {{center.centerName}}
+                        </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row mt-1 mb-3">
+                <div class="col-4">
+                    <p>Dial code</p>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Select</mat-label>
+                        <mat-select formControlName="dialCode">
+                        <mat-option *ngFor="let dialCode of dialCode" [value]="dialCode">
+                            {{dialCode}}
+                        </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-8">
+                    <p>Contact Number</p>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Enter Contact Number</mat-label>
+                        <input type="number" matInput placeholder="Parent Name" class="w-100" formControlName="contactNo">
+                        <mat-hint>*Required</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row mt-1 mb-3">
+                <div class="col">
+                    <p>Email</p>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Enter Email</mat-label>
+                        <input type="email" matInput placeholder="Email" class="w-100" formControlName="email">
+                        <mat-hint>*Required</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row mt-1 mb-3">
+                <div class="col">
+                    <p>Address</p>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Enter Address</mat-label>
+                        <textarea matInput rows="4" cols="50" formControlName="address"  placeholder="Address" class="w-100"></textarea>
+                        <mat-hint>*Required</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row mt-1 mb-3">
+                <p>Status</p>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Select</mat-label>
+                        <mat-select formControlName="statusId">
+                        <mat-option *ngFor="let status of data.statusList" [value]="status.id">
+                            {{status.statusName}}
+                        </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-dialog-actions class="d-flex justify-content-end">
+                <button mat-button mat-dialog-close>Cancel</button>
+                <button mat-button (click)="submit()">{{data.mode}}</button>
+            </mat-dialog-actions>
+        </div>
+    </form>
+</div>

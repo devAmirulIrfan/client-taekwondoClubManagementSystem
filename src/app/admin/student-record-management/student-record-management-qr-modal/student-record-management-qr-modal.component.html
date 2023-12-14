@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col">
+        <div id="test" style="border-style:solid">
+            <h1 mat-dialog-title class="text-center mt-3">Energizing Wellness Taekwondo</h1>
+        <div mat-dialog-content class="d-flex justify-content-center">
+            <qrcode [qrdata]="qrCodeData" [scale]="8"></qrcode>
+        </div>
+        <div class="row mx-3">
+            <div class="col">
+                <p><span><b>Name: </b></span><span>{{data.studentName}}</span></p>
+                <p><span><b>Center: </b></span><span>{{data.centerName}}</span></p>
+                <p><span><b>Contact No: </b></span><span>{{data.contactNo}}</span></p>
+                <p><span><b>Parent Name: </b></span><span>{{data.parentName}}</span></p>
+            </div>
+        </div>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button (click)="convetToPDF()">Print PDF</button>
+            <button mat-button mat-dialog-close>Close</button>
+        </div>
+    </div>
+</div>

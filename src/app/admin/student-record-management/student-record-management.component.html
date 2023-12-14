@@ -1,0 +1,137 @@
+<div class="mt-5">
+  <button mat-raised-button color="success"
+    (click)=" openStudentManagementRecordModal(1,null)"><mat-icon>person_add</mat-icon>&nbsp;
+    Add Student</button>
+</div>
+
+<mat-card class="my-3 shadow overflow-auto" style="height: 300px;">
+  <mat-card-content>
+    <div class="d-flex justify-content-center my-5">
+      <div class="">
+        <mat-form-field appearance="outline">
+          <mat-label>Student Name Search </mat-label>
+          <input matInput placeholder="Student Name" [(ngModel)]="studentNameSearch" (keyup)="handlePage($event)">
+        </mat-form-field>
+      </div>
+      <div class="ms-5">
+        <mat-form-field appearance="outline">
+          <mat-label>Parent Name Search </mat-label>
+          <input matInput placeholder="Parent Name" [(ngModel)]="parentNameSearch" (keyup)="handlePage($event)">
+        </mat-form-field>
+      </div>
+      <div class="ms-5">
+        <section class="example-section">
+          <span class="example-list-section">
+            <mat-checkbox class="example-margin" [color]="gradeCheckbox.color"
+              (change)="setAllGradeCheckedOrUnchecked($event.checked); handlePage($event)"
+              [checked]="isAllGradeChecked">
+              {{gradeCheckbox.name}}
+            </mat-checkbox>
+          </span>
+          <span class="example-list-section">
+            <ul>
+              <li *ngFor="let grade of gradeCheckbox.grades">
+                <mat-checkbox [(ngModel)]="grade.checked" (change)="handlePage($event); checkGrades()"
+                  [color]="grade.color">
+                  {{grade.gradeName}}
+                </mat-checkbox>
+              </li>
+            </ul>
+          </span>
+        </section>
+      </div>
+
+      <div class="ms-5">
+        <section class="example-section">
+          <span class="example-list-section">
+            <mat-checkbox class="example-margin" [color]="centerCheckbox.color"
+              (change)="setAllCenterCheckedOrUnchecked($event.checked); handlePage($event)"
+              [checked]="isAllCenterChecked">
+              {{gradeCheckbox.name}}
+            </mat-checkbox>
+          </span>
+          <span class="example-list-section">
+            <ul>
+              <li *ngFor="let center of centerCheckbox.centers">
+                <mat-checkbox [(ngModel)]="center.checked" (change)="checkCenters(); handlePage($event)"
+                  [color]="center.color">
+                  {{center.centerName}}
+                </mat-checkbox>
+              </li>
+            </ul>
+          </span>
+        </section>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+
+<div class="mt-1">
+  <mat-paginator [length]="rowCount" [pageSize]="10" aria-label="Select page" (page)="handlePage($event)">
+  </mat-paginator>
+  <div class="table-responsive">
+    <table mat-table [dataSource]="paginatedStudentListData" class="mat-elevation-z8" class="mb-5 ">
+
+      <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="studentName">
+        <th mat-header-cell *matHeaderCellDef>Student Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.studentName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="birthDate">
+        <th mat-header-cell *matHeaderCellDef>Birth Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.birthDate}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="studentCenter">
+        <th mat-header-cell *matHeaderCellDef>Center</th>
+        <td mat-cell *matCellDef="let element"> {{element.centerName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="studentBelt">
+        <th mat-header-cell *matHeaderCellDef>Belt</th>
+        <td mat-cell *matCellDef="let element"> {{element.gradeName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="parentName">
+        <th mat-header-cell *matHeaderCellDef>Parent's Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.parentName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contactNo">
+        <th mat-header-cell *matHeaderCellDef>Contact No</th>
+        <td mat-cell *matCellDef="let element"> {{element.contactNo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element"> {{element.statusName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"><mat-icon style="cursor: pointer;"
+            (click)=" openStudentManagementRecordModal(2, (element.id))">
+            border_color</mat-icon>&nbsp;&nbsp;&nbsp;<mat-icon
+            (click)="openStudentManagementQrRecordModal(element.id, element.studentName, element.centerName, element.contactNo, element.parentName)"
+            style="cursor: pointer;">print</mat-icon></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+    </table>
+  </div>
+
+</div>
