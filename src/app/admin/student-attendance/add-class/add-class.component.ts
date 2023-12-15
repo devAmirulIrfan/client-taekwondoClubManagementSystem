@@ -1,24 +1,34 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { AddClassService } from './add-class.service';
 import { tap } from 'rxjs';
 import { RequestClassSchedule, ResposneClassSchedule } from './config/class-schedule.model';
+import { ResponseClassHistory } from './config/class-history.model';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-class',
   templateUrl: './add-class.component.html',
   styleUrls: ['./add-class.component.scss']
 })
-export class AddClassComponent {
+export class AddClassComponent implements OnInit{
 
-  displayedColumns: string[] = ['day', 'time', 'session', 'centerName', 'action'];
+  displayedClassScheduleColumns: string[] = ['day', 'time', 'session', 'centerName', 'action'];
+  displayedClassHistoryColumns: string[] = ['date', 'day', 'time', 'center', 'session', 'action'];
   classDate!: Date | null
   classSchedule: ResposneClassSchedule[] = []
+  classHistory: ResponseClassHistory[] = []
 
   classDateSignal = signal<Date | null>(null)
 
-  constructor(private service: AddClassService) { }
+  constructor(private service: AddClassService, private router: Router) {}
+
+  ngOnInit(){
+    this.getClassHistory()
+  }
+
 
   searchClassDate() {
 
@@ -64,7 +74,10 @@ export class AddClassComponent {
       }
 
       this.service.addClass(addClassObjectRequest).pipe(tap({
-        next: (response) => console.log(response),
+        next:  () => {
+          alert('1 class record successfully added')
+          this.getClassHistory()
+        },
         error: (err) => {
           if(err.status === 403){
             alert("class already added into database, please navigate to class history")
@@ -73,6 +86,26 @@ export class AddClassComponent {
 
       })).subscribe()
     }
+  }
+
+
+  getClassHistory(){
+    this.service.getFullClassHistoryList().pipe((tap({
+      next: (response) => {
+        this.classHistory = response
+      }
+    }))).subscribe()
+  }
+
+  navigateToAttendance(classHistoryId: number){
+
+    const classHistoryObject = this.classHistory.find((classHistory) => classHistory.id === classHistoryId)
+
+    if(classHistoryObject){
+      this.router.navigate(['/admin/attendance', classHistoryObject.id], {queryParams: {
+        test: "jaja"
+      }})
+    }    
   }
 
   

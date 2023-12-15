@@ -4,6 +4,7 @@ import { StudentRecordManagementComponent } from './student-record-management/st
 import { AdminComponent } from './admin.component';
 import { ParentRecordManagementComponent } from './parent-record-management/parent-record-management.component';
 import { AddClassComponent } from './student-attendance/add-class/add-class.component';
+import { AttendanceComponent } from './student-attendance/attendance/attendance.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
     {
       path: 'add-new-class',
       component: AddClassComponent
+    },
+    {
+      path: 'attendance/:id',
+      component: AttendanceComponent
     }
   ]
   }

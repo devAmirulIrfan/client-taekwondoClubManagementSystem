@@ -1,11 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { RequestClassSchedule, ResposneClassSchedule } from './config/class-schedule.model';
+import { ResponseClassHistory } from './config/class-history.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AddClassService {
+
+  ObjectValue: ResponseClassHistory = {
+    id: null,
+    date: null,
+    day: null,
+    startTime: null,
+    endTime: null,
+    centerName: null,
+    session: null
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -15,5 +27,9 @@ export class AddClassService {
 
   addClass(classValues: RequestClassSchedule){
     return this.http.post(`http://localhost:8080/addClassHistory/`, classValues)
+  }
+
+  getFullClassHistoryList(){
+    return this.http.get<ResponseClassHistory[]>(`http://localhost:8080/classHistory`)
   }
 }

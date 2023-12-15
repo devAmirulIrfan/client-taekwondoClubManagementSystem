@@ -29,6 +29,7 @@ import { StudentRecordManagementQrModalComponent } from './student-record-manage
 import { QRCodeModule } from 'angularx-qrcode';
 import jsPDF from 'jspdf';
 import { AddClassComponent } from './student-attendance/add-class/add-class.component';
+import { AttendanceComponent } from './student-attendance/attendance/attendance.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AddClassComponent } from './student-attendance/add-class/add-class.comp
     ParentRecordManagementComponent,
     ParentRecordManagementModalComponent,
     StudentRecordManagementQrModalComponent,
-    AddClassComponent
+    AddClassComponent,
+    AttendanceComponent
   ],
   imports: [
     CommonModule,
