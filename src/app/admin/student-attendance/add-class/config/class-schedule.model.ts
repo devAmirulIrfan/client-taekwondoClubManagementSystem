@@ -6,3 +6,8 @@ export interface ResposneClassSchedule {
     centerName: string;
     session: string;
   }
+
+  export interface RequestClassSchedule {
+    classId: number
+    date: string
+  }

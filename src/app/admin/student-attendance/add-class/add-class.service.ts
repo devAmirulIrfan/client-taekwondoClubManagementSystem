@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ResposneClassSchedule } from './config/class-schedule.model';
+import { RequestClassSchedule, ResposneClassSchedule } from './config/class-schedule.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,5 +11,9 @@ export class AddClassService {
 
   getClassSchedule(dayId: number){
     return this.http.get<ResposneClassSchedule[]>(`http://localhost:8080/getClassByDayId/${dayId}`)
+  }
+
+  addClass(classValues: RequestClassSchedule){
+    return this.http.post(`http://localhost:8080/addClassHistory/`, classValues)
   }
 }

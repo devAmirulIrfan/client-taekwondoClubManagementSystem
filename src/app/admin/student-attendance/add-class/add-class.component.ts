@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { AddClassService } from './add-class.service';
 import { tap } from 'rxjs';
-import { ResposneClassSchedule } from './config/class-schedule.model';
+import { RequestClassSchedule, ResposneClassSchedule } from './config/class-schedule.model';
 
 @Component({
   selector: 'app-add-class',
@@ -12,9 +12,11 @@ import { ResposneClassSchedule } from './config/class-schedule.model';
 })
 export class AddClassComponent {
 
-  displayedColumns: string[] = ['day', 'time', 'centerName', 'action'];
-  classDate?: Date | null
+  displayedColumns: string[] = ['day', 'time', 'session', 'centerName', 'action'];
+  classDate!: Date | null
   classSchedule: ResposneClassSchedule[] = []
+
+  classDateSignal = signal<Date | null>(null)
 
   constructor(private service: AddClassService) { }
 
@@ -24,13 +26,13 @@ export class AddClassComponent {
       const dayId = this.getDayId(this.classDate)
       this.service.getClassSchedule(dayId).pipe(tap({
         next: (response) => {
-          if(response.length > 0){
+          if (response.length > 0) {
             this.classSchedule = response
             console.log(this.classSchedule)
-          }else{
-            alert(`no class scheduled for today ${this.classDate}`)
+          } else {
             this.classSchedule = []
             this.classDate = null
+            alert(`no class scheduled for today ${this.classDate}`)
           }
         }
       })).subscribe()
@@ -48,6 +50,32 @@ export class AddClassComponent {
 
     return dayOfWeekIndex
   }
+
+  addClass(id: number) {
+
+    if(this.classDate){
+
+      const classDate = this.classDate.toISOString().slice(0, 10)
+      const classId = id
+
+      const addClassObjectRequest: RequestClassSchedule = {
+        classId: classId,
+        date: classDate
+      }
+
+      this.service.addClass(addClassObjectRequest).pipe(tap({
+        next: (response) => console.log(response),
+        error: (err) => {
+          if(err.status === 403){
+            alert("class already added into database, please navigate to class history")
+          }
+        }
+
+      })).subscribe()
+    }
+  }
+
+  
 
 
 }
