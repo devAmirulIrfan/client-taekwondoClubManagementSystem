@@ -1,9 +1,9 @@
 export interface ResponseClassHistory {
-    id: number | null;
-    date: string | null;
-    day: string | null;
-    startTime: string |null;
-    endTime: string | null;
-    centerName: string | null;
-    session: string | null;
+    id: number;
+    date: string;
+    day: string;
+    startTime: string;
+    endTime: string;
+    centerName: string;
+    session: string;
 }

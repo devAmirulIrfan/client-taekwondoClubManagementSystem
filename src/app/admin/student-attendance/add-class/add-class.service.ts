@@ -9,16 +9,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AddClassService {
 
-  ObjectValue: ResponseClassHistory = {
-    id: null,
-    date: null,
-    day: null,
-    startTime: null,
-    endTime: null,
-    centerName: null,
-    session: null
-  }
-
   constructor(private http: HttpClient) { }
 
   getClassSchedule(dayId: number){

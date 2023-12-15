@@ -1,0 +1,30 @@
+<div class="row mt-5">
+    <div class="col">
+        <mat-card>
+            <mat-card-content class="my-3 ms-5">
+                <div class="row">
+                    <div class="col-4">
+                        Class ID : {{classInformation?.id}}
+                    </div>
+                    <div class="col-4">
+                        Date : {{classInformation?.date}}
+                    </div>
+                    <div class="col-4">
+                        Day : {{classInformation?.day}}
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-4">
+                        Time : {{classInformation?.startTime}} - {{classInformation?.endTime}}
+                    </div>
+                    <div class="col-4">
+                        Center : {{classInformation?.centerName}}
+                    </div>
+                    <div class="col-4">
+                        Session : {{classInformation?.session}}
+                    </div>
+                </div>
+            </mat-card-content>
+          </mat-card>
+    </div>
+</div>

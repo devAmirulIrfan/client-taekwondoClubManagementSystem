@@ -9,11 +9,18 @@ import { tap } from 'rxjs';
   styleUrls: ['./attendance.component.scss']
 })
 export class AttendanceComponent implements OnInit{
+
+  classInformation?: ResponseClassHistory
   
 
 
   ngOnInit(){
+      this.getClassHistory()
+  }
 
+  getClassHistory(){
+    const jsonData = localStorage.getItem('classAttendanceObject')
+    jsonData ? this.classInformation = JSON.parse(jsonData) : null
   }
 
 

@@ -102,9 +102,9 @@ export class AddClassComponent implements OnInit{
     const classHistoryObject = this.classHistory.find((classHistory) => classHistory.id === classHistoryId)
 
     if(classHistoryObject){
-      this.router.navigate(['/admin/attendance', classHistoryObject.id], {queryParams: {
-        test: "jaja"
-      }})
+      const objectString = JSON.stringify(classHistoryObject)
+      localStorage.setItem('classAttendanceObject', objectString)
+      this.router.navigate(['/admin/attendance', classHistoryId])
     }    
   }
 
