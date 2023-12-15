@@ -30,6 +30,10 @@ import { QRCodeModule } from 'angularx-qrcode';
 import jsPDF from 'jspdf';
 import { AddClassComponent } from './student-attendance/add-class/add-class.component';
 import { AttendanceComponent } from './student-attendance/attendance/attendance.component';
+import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
+
+// Necessary to solve the problem of losing internet connection
+LOAD_WASM().subscribe();
 
 @NgModule({
   declarations: [
@@ -60,7 +64,8 @@ import { AttendanceComponent } from './student-attendance/attendance/attendance.
     MatIconModule,
     MatCheckboxModule,
     MatCardModule,
-    QRCodeModule
+    QRCodeModule,
+    NgxScannerQrcodeModule
 
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'fr'}]

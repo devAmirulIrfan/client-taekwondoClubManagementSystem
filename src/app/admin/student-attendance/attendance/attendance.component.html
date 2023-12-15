@@ -28,3 +28,10 @@
           </mat-card>
     </div>
 </div>
+
+<div class="row mt-3">
+    <div class="d-flex justify-content-center">
+        <ngx-scanner-qrcode class="col-6 h-25" #action="scanner" (event)="handleScan($event, action)"></ngx-scanner-qrcode>
+    </div>
+</div>
+<!-- <button (click)="action.isStart ? action.stop() : action.start()">{{action.isStart ? 'Stop' : 'Start'}}</button> -->
