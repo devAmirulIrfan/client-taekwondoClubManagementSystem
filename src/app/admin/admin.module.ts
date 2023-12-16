@@ -70,6 +70,6 @@ LOAD_WASM().subscribe();
     MatExpansionModule
 
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'fr'}]
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'ms-MY'}]
 })
 export class AdminModule { }
