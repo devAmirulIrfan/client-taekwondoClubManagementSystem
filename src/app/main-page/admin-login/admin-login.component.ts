@@ -45,7 +45,7 @@ export class AdminLoginComponent implements OnInit{
         },
         error: (response) => {
           console.log(response)
-          console.log('Wrong username or password');
+          alert('Wrong username or password');
         }
       })
     ).subscribe();

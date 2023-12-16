@@ -75,21 +75,27 @@ paginatedParentListData: any = []
   }
 
   addParent(parentRecordformData: requestParentRecordForm){
-    this.service.addParent(parentRecordformData).pipe().subscribe(
-      () => {
+    this.service.addParent(parentRecordformData).pipe(tap({
+      next: () => {
         alert('new parent record added')
         this.getData()
+      },
+      error: (err) => {
+        alert(err.error)
       }
-    )
+    })).subscribe()
   }
 
   updateParent(parentId: number, parentRecordformData: requestParentRecordForm){
-    this.service.updateParent(parentId, parentRecordformData).subscribe(
-      () => {
+    this.service.updateParent(parentId, parentRecordformData).pipe(tap({
+      next: () => {
         alert('parent record updated')
         this.getData()
+      },
+      error: (err) => {
+        alert(err.error)
       }
-    )
+    })).subscribe()
   }
 
   processModalData(action: number, parentId?: number): any{
