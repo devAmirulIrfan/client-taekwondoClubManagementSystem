@@ -22,7 +22,7 @@ export class AttendanceService {
   }
 
   getClassAttendance(date: string, classId: number){
-    return this.http.get<ResponseStudentAttendance[]>(`${environment}/getAttendanceList/${date}/${classId}`,)
+    return this.http.get<ResponseStudentAttendance[]>(`${environment}/getAttendanceList/${date}/${classId}`)
   }
 
 
