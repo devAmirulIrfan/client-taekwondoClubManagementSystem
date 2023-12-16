@@ -31,6 +31,7 @@ import jsPDF from 'jspdf';
 import { AddClassComponent } from './student-attendance/add-class/add-class.component';
 import { AttendanceComponent } from './student-attendance/attendance/attendance.component';
 import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 // Necessary to solve the problem of losing internet connection
 LOAD_WASM().subscribe();
@@ -65,7 +66,8 @@ LOAD_WASM().subscribe();
     MatCheckboxModule,
     MatCardModule,
     QRCodeModule,
-    NgxScannerQrcodeModule
+    NgxScannerQrcodeModule,
+    MatExpansionModule
 
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'fr'}]
