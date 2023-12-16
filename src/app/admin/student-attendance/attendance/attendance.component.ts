@@ -37,11 +37,11 @@ export class AttendanceComponent implements OnInit, AfterViewInit{
   ngOnInit(){
 
     this.getClassInfo()
-    this.getAttendanceList()
   }
 
   ngAfterViewInit(): void {
     this.action.start()
+    this.getAttendanceList()
   }
 
   getClassInfo(){
