@@ -51,7 +51,7 @@ export class AttendanceComponent implements OnInit, AfterViewInit{
 
 
   getAttendanceList(){
-    this.service.getClassAttendance(this.classInformation.date.slice(0,10), this.classInformation.id).pipe(
+    this.service.getClassAttendance(this.classInformation.date, this.classInformation.id).pipe(
       tap({
         next: (response) => this.studentAttendance = response
       })
