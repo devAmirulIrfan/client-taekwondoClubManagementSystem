@@ -1,0 +1,98 @@
+<div class="row mt-5">
+    <div class="col">
+        <h2>Add class</h2>
+        <div class="row mt-1 mb-3">
+            <div class="d-inline col-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Choose class date</mat-label>
+                    <input matInput [matDatepicker]="picker" class="w-100" [(ngModel)]="classDate" />
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="d-inline col">
+                <button mat-raised-button color="primary" (click)="searchClassDate()">Search Class</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3 mb-3" *ngIf="classSchedule.length">
+    <div class="col">
+        <p>{{classDate}} class list</p>
+        <table mat-table [dataSource]="classSchedule" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="day">
+                <th mat-header-cell *matHeaderCellDef> centerName </th>
+                <td mat-cell *matCellDef="let element"> {{element.day}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="time">
+                <th mat-header-cell *matHeaderCellDef> time </th>
+                <td mat-cell *matCellDef="let element"> {{element.startTime}} - {{element.endTime}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="session">
+                <th mat-header-cell *matHeaderCellDef> session </th>
+                <td mat-cell *matCellDef="let element"> {{element.session}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="centerName">
+                <th mat-header-cell *matHeaderCellDef> centerName </th>
+                <td mat-cell *matCellDef="let element"> {{element.centerName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> action </th>
+                <td mat-cell *matCellDef="let element"><button mat-raised-button color="accent" (click)="addClass(element.id)">Add
+                        Class</button></td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedClassScheduleColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedClassScheduleColumns;"></tr>
+        </table>
+    </div>
+</div>
+<hr>
+<div class="row mt-5">
+    <div class="col">
+        <h2>Class History</h2>
+        <table mat-table [dataSource]="classHistory" class="mat-elevation-z8 mb-5">
+
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="day">
+                <th mat-header-cell *matHeaderCellDef> Day </th>
+                <td mat-cell *matCellDef="let element"> {{element.day}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="time">
+                <th mat-header-cell *matHeaderCellDef> Time </th>
+                <td mat-cell *matCellDef="let element"> {{element.startTime}} - {{element.endTime}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="center">
+                <th mat-header-cell *matHeaderCellDef>Center</th>
+                <td mat-cell *matCellDef="let element">{{element.centerName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="session">
+                <th mat-header-cell *matHeaderCellDef>Session</th>
+                <td mat-cell *matCellDef="let element">{{element.session}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" (click)="navigateToAttendance(element.id)">View</button></td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedClassHistoryColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedClassHistoryColumns"></tr>
+        </table>
+    </div>
+</div>
