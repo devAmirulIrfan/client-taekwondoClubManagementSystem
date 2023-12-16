@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { requestAdminLoginFormModel } from '../request-response-config/request-adminLoginForm-model';
 import { Router } from '@angular/router';
+import { environment } from 'src/environment/environment';
 
 
 @Injectable({
@@ -27,7 +28,7 @@ export class AdminLoginService {
 
   login(adminLoginFormData: requestAdminLoginFormModel){
     console.log(adminLoginFormData)
-    return this.http.post('http://localhost:8080/adminLogin', adminLoginFormData ).pipe(
+    return this.http.post(`${environment}/adminLogin`, adminLoginFormData ).pipe(
       tap((response: any) => {
         console.log(response)
         console.log(response.token)
@@ -44,6 +45,6 @@ export class AdminLoginService {
   }
 
 getStudent(){
-  return this.http.get('http://localhost:8080/getAllStudent')
+  return this.http.get(`${environment}/getAllStudent`)
 }
 }
