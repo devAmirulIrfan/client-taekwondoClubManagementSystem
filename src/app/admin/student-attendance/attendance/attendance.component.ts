@@ -116,7 +116,7 @@ export class AttendanceComponent implements OnInit, AfterViewInit{
 
     this.service.deleteAttendance(attendanceId).pipe(tap({
       next: (response) => alert(response),
-      error: (err) => alert(err)
+      error: (err) => alert(err.error)
     }),
     finalize(()  => this.getAttendanceList())
     ).subscribe()

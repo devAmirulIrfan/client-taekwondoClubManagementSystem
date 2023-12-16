@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { requestStudentRecordForm, responseStudentCenter, responseStudentGrade, responseStudentParent, responseStudentRecord, responseStudentStatus } from './student-record-management-modal/config/model-config/request-response-model-config';
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-student-record-management',
@@ -266,19 +267,27 @@ export class StudentRecordManagementComponent implements OnInit{
   }
 
   addStudent(studentRecordFormData: requestStudentRecordForm){
-    this.service.addStudent(studentRecordFormData).pipe().subscribe(
-      () => {
+    this.service.addStudent(studentRecordFormData).pipe(tap({
+      next: () => {
         alert("1 Student record created")
         this.getAllStudentRecord()
+      },
+      error: (err) => {
+        alert(err)
       }
-    );
+    })).subscribe();
   }
 
   updateStudent(studentId: number, studentRecordFormValues: requestStudentRecordForm){
-    this.service.updateStudent(studentId, studentRecordFormValues).subscribe(() => {
-      alert("Student Record updated")
-      this.getAllStudentRecord()
-    })
+    this.service.updateStudent(studentId, studentRecordFormValues).pipe(tap({
+      next: () => {
+        alert("Student Record updated")
+        this.getAllStudentRecord()
+      },
+      error: (err) => {
+        alert(err)
+      }
+    })).subscribe()
   }
 
 }
