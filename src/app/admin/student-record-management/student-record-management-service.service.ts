@@ -33,7 +33,7 @@ export class StudentRecordManagementServiceService {
   }
 
   getStudentCenter(): Observable<responseStudentCenter[]>{
-    return this.http.get<responseStudentCenter[]>('${environment}/centers')
+    return this.http.get<responseStudentCenter[]>(`${environment}/centers`)
   }
 
   getSingleStudent(id: number | null): Observable<responseStudentRecord>{
