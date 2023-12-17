@@ -1,5 +1,5 @@
 export interface RequestStudentAttendance {
     date: string,
-    classId: number,
+    classHistoryId: number,
     studentId: number
 }

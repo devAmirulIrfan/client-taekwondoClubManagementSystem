@@ -1,11 +1,10 @@
-<div class="d-flex justify-content-start mt-5">
-    <div>
+<div class="row my-5">
+    <div class="col-md-3 col-sm-12 my-3">
         <button mat-raised-button color="primary" (click)="openDialog(1)"><mat-icon>person_add</mat-icon>&nbsp; Add
-            Parent</button>
+         Parent</button>
     </div>
-
-    <div class="ms-3">
-        <mat-form-field appearance="outline">
+    <div class="col-md-6 col-sm-12 my-3">
+        <mat-form-field appearance="outline" class="w-100">
             <mat-label>Parent Name Search </mat-label>
             <input matInput placeholder="Parent Name" [(ngModel)]="parentNameSearch" (keyup)="handlePage($event)">
         </mat-form-field>

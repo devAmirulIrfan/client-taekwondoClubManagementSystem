@@ -281,6 +281,8 @@ export class StudentRecordManagementComponent implements OnInit{
   updateStudent(studentId: number, studentRecordFormValues: requestStudentRecordForm){
     this.service.updateStudent(studentId, studentRecordFormValues).pipe(tap({
       next: () => {
+        this.studentNameSearch = ''
+        this.parentNameSearch = ''
         alert("Student Record updated")
         this.getAllStudentRecord()
       },

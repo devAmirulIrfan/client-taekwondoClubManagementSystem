@@ -51,7 +51,14 @@ export class AttendanceComponent implements OnInit, AfterViewInit{
 
 
   getAttendanceList(){
-    this.service.getClassAttendance(this.classInformation.date, this.classInformation.id).pipe(
+
+    const attendanceObject = {
+      date: this.classInformation.date,
+      classHistoryId: this.classInformation.id
+    }
+
+
+    this.service.getClassAttendance(attendanceObject).pipe(
       tap({
         next: (response) => this.studentAttendance = response
       })
@@ -94,7 +101,7 @@ export class AttendanceComponent implements OnInit, AfterViewInit{
 
     const attendanceObject: RequestStudentAttendance = {
       date: this.classInformation?.date.toString().slice(0,10),
-      classId: this.classInformation?.id,
+      classHistoryId: this.classInformation?.id,
       studentId: studentId
     }
 

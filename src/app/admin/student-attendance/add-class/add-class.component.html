@@ -1,20 +1,16 @@
-<div class="row mt-5">
-    <div class="col">
-        <h2>Add class</h2>
-        <div class="row mt-1 mb-3">
-            <div class="d-inline col-4">
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Choose class date</mat-label>
-                    <input matInput [matDatepicker]="picker" class="w-100" [(ngModel)]="classDate" />
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-            </div>
-            <div class="d-inline col">
-                <button mat-raised-button color="primary" (click)="searchClassDate()">Search Class</button>
-            </div>
-        </div>
+<div class="row my-5 d-inline">
+    <h2>Add class</h2>
+    <div class="col-md-6 col-sm-12 my-3">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Choose class date</mat-label>
+            <input matInput [matDatepicker]="picker" class="w-100" [(ngModel)]="classDate" />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <button mat-raised-button color="primary" (click)="searchClassDate()">Search Class</button>
     </div>
 </div>
 
@@ -53,9 +49,10 @@
             <tr mat-row *matRowDef="let row; columns: displayedClassScheduleColumns;"></tr>
         </table>
     </div>
+    <hr>
 </div>
-<hr>
-<div class="row mt-5">
+
+<div class="row mt-5 table-responsive">
     <div class="col">
         <h2>Class History</h2>
         <table mat-table [dataSource]="classHistory" class="mat-elevation-z8 mb-5">

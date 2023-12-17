@@ -90,6 +90,7 @@ paginatedParentListData: any = []
     this.service.updateParent(parentId, parentRecordformData).pipe(tap({
       next: () => {
         alert('parent record updated')
+        this.parentNameSearch = ''
         this.getData()
       },
       error: (err) => {

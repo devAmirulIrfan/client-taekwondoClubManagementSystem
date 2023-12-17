@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResponseStudent } from '../model/response-student-model'
 import { RequestStudentAttendance } from '../model/request-student-attendance.model';
@@ -21,8 +21,13 @@ export class AttendanceService {
     return this.http.post(`${environment}/addStudentAttendance/`, attendanceValues)
   }
 
-  getClassAttendance(date: string, classId: number){
-    return this.http.get<ResponseStudentAttendance[]>(`${environment}/getAttendanceList/${date}/${classId}`)
+  getClassAttendance(classAttendanceInfo: any){
+    
+    const httpParams = new HttpParams()
+    .set('date', classAttendanceInfo.date)
+    .set('classHistoryId', classAttendanceInfo.classHistoryId);
+
+    return this.http.get<ResponseStudentAttendance[]>(`${environment}/getAttendanceList/`, {params: httpParams})
   }
 
 
