@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.scss']
 })
-export class AttendanceComponent implements OnInit, AfterViewInit{
+export class AttendanceComponent implements OnInit{
   
   classInformation!: ResponseClassHistory
 
@@ -56,12 +56,9 @@ export class AttendanceComponent implements OnInit, AfterViewInit{
         this.classInformation = queryParamsObject
       }),
       concatMap(() => this.getAttendanceList(this.classInformation.date, this.classInformation.id))
-    ).subscribe();
+    ).subscribe()
   }
 
-  ngAfterViewInit(): void {
-    this.action.start()
-  }
 
   getAttendanceList(date: string, classHistoryId: number){
 
@@ -76,17 +73,11 @@ export class AttendanceComponent implements OnInit, AfterViewInit{
 
   handleScan(e: any, action?: any){
 
-    const value = e[0].value
+    const value: number = e[0].value
 
-    if(value !== this.qrValue){
-      console.log(value)
-    }
-
-    of(value).pipe(
-      concatMap(() => of(this.action.stop())),
-      concatMap(() => of(this.addAttendance(value))),
-      finalize(() => this.action.start())
-    ).subscribe()
+    this.action.stop()
+    
+    this.addAttendance(value)
 
   }
 
@@ -115,25 +106,29 @@ export class AttendanceComponent implements OnInit, AfterViewInit{
 
     this.service.addAttendance(attendanceObject).pipe(
       concatMap(() => this.getAttendanceList(this.classInformation.date, this.classInformation.id)),
-      tap(() => alert('1 student record successfully added')), // Log success
+      tap(() => {alert('1 student record successfully added')
+    }), // Log success
       catchError((error) => {
-        console.error('Error:', error); // Log error
-        // Handle the error as needed
+        alert(error.error)
         return of(null); // Re-throw the error to propagate it to the outer observable
-      })
-    ).subscribe();
+      }),
+      finalize(() => this.action.stop()? this.action.start(): null)
+    ).subscribe()
 
   }
 
 
   deleteAttendance(attendanceId: number){
 
-    this.service.deleteAttendance(attendanceId).pipe(tap({
-      next: (response) => alert(response),
-      error: (err) => alert(err.error)
-    }),
-    concatMap(() => of(this.getAttendanceList(this.classInformation.date, this.classInformation.id)))
-    ).subscribe()
+    this.service.deleteAttendance(attendanceId).pipe(
+      concatMap(() => this.getAttendanceList(this.classInformation.date, this.classInformation.id)),
+      tap(() => alert('1 student record successfully delted')), // Log success
+      catchError((error) => {
+        console.error('The Error:', error); // Log error
+        // Handle the error as needed
+        return of(null); // Re-throw the error to propagate it to the outer observable
+      })
+    ).subscribe();
   }
 
 
