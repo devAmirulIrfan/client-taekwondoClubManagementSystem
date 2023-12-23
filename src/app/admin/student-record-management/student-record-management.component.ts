@@ -62,12 +62,12 @@ export class StudentRecordManagementComponent implements OnInit{
     //GET STUDENT BASED ON  STUDENT NAME KEWYWORD
     const searchedStudentNameKeywWordAfterWhiteSpaceTrim = this.studentNameSearch.replace(/\s+/g, '')
 
-    searchedStudentNameKeywWordAfterWhiteSpaceTrim.length > 0 ? filteredStudentRecord = [...this.studentList.filter(student => student.studentName.toLocaleLowerCase().includes(this.studentNameSearch))] : null
+    searchedStudentNameKeywWordAfterWhiteSpaceTrim.length > 0 ? filteredStudentRecord = [...this.studentList.filter(student => student.studentName.toLocaleLowerCase().includes(this.studentNameSearch.toLocaleLowerCase()))] : null
 
     //GET STUDENT BASED ON PARENT NAME
     const searchedParentNameKeywWordAfterWhiteSpaceTrim = this.parentNameSearch.replace(/\s+/g, '')
 
-    searchedParentNameKeywWordAfterWhiteSpaceTrim.length > 0 ? filteredStudentRecord = [...this.studentList.filter(student => student.parentName.toLocaleLowerCase().includes(this.parentNameSearch))] : null
+    searchedParentNameKeywWordAfterWhiteSpaceTrim.length > 0 ? filteredStudentRecord = [...this.studentList.filter(student => student.parentName.toLocaleLowerCase().includes(this.parentNameSearch.toLocaleLowerCase()))] : null
 
 
     // GET STUDENT BASED ON GRADE

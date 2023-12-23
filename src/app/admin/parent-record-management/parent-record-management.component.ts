@@ -116,7 +116,7 @@ paginatedParentListData: any = []
     //GET PARENTS NAME BASED ON PARENTS NAME KEYWORD
     const searchedParentNameKeywWordAfterWhiteSpaceTrim = this.parentNameSearch.replace(/\s+/g, '')
 
-    searchedParentNameKeywWordAfterWhiteSpaceTrim.length > 0 ? filteredParentRecord = [...this.parentList.filter(parent => parent.parentName.toLocaleLowerCase().includes(this.parentNameSearch))] : null
+    searchedParentNameKeywWordAfterWhiteSpaceTrim.length > 0 ? filteredParentRecord = [...this.parentList.filter(parent => parent.parentName.toLocaleLowerCase().includes(this.parentNameSearch.toLocaleLowerCase()))] : null
 
     return filteredParentRecord
   }
