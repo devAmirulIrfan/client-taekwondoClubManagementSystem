@@ -4,6 +4,7 @@ import { ResponseStudent } from '../model/response-student-model'
 import { RequestStudentAttendance } from '../model/request-student-attendance.model';
 import { ResponseStudentAttendance } from '../model/response-student-attendance.model';
 import { environment } from 'src/environment/environment';
+import { requestAttendanceList } from '../model/request-attendance-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,16 +19,16 @@ export class AttendanceService {
 
 
   addAttendance(attendanceValues: RequestStudentAttendance){
-    return this.http.post(`${environment}/addStudentAttendance/`, attendanceValues)
+    return this.http.post(`${environment}/addStudentAttendance`, attendanceValues)
   }
 
-  getClassAttendance(classAttendanceInfo: any){
+  getClassAttendance(classAttendanceInfo: requestAttendanceList){
     
     const httpParams = new HttpParams()
     .set('date', classAttendanceInfo.date)
     .set('classHistoryId', classAttendanceInfo.classHistoryId);
 
-    return this.http.get<ResponseStudentAttendance[]>(`${environment}/getAttendanceList/`, {params: httpParams})
+    return this.http.get<ResponseStudentAttendance[]>(`${environment}/getAttendanceList`, {params: httpParams})
   }
 
 
