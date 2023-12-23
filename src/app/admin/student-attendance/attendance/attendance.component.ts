@@ -7,6 +7,7 @@ import { AttendanceService } from './config/service/attendance.service';
 import { ResponseStudent } from './config/model/response-student-model';
 import { RequestStudentAttendance } from './config/model/request-student-attendance.model';
 import { ResponseStudentAttendance } from './config/model/response-student-attendance.model';
+import { requestAttendanceList } from './config/model/request-attendance-list.model';
 
 @Component({
   selector: 'app-attendance',
@@ -35,32 +36,38 @@ export class AttendanceComponent implements OnInit, AfterViewInit{
 
 
   ngOnInit(){
-
     this.getClassInfo()
   }
 
   ngAfterViewInit(): void {
     this.action.start()
-    this.getAttendanceList()
   }
 
   getClassInfo(){
     const jsonData = localStorage.getItem('classAttendanceObject')
     jsonData ? this.classInformation = JSON.parse(jsonData) : null
+
+    of(jsonData).pipe(
+      concatMap((jsonData) => of(jsonData ? this.classInformation = JSON.parse(jsonData) : null)),
+      concatMap(() => of(this.getAttendanceList()))
+    ).subscribe()
+
+    
   }
 
 
   getAttendanceList(){
 
-    const attendanceObject = {
-      date: this.classInformation.date,
+    const attendanceObject: requestAttendanceList = {
+      date: `${this.classInformation.date}`,
       classHistoryId: this.classInformation.id
     }
 
 
     this.service.getClassAttendance(attendanceObject).pipe(
       tap({
-        next: (response) => this.studentAttendance = response
+        next: (response) => this.studentAttendance = response,
+        error: (err) => console.log(err)
       })
     ).subscribe()
   }
