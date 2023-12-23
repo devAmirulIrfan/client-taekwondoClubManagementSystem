@@ -22,11 +22,11 @@ export class AttendanceService {
     return this.http.post(`${environment}/addStudentAttendance`, attendanceValues)
   }
 
-  getClassAttendance(classAttendanceInfo: requestAttendanceList){
+  getClassAttendance(date: string, classHistoryId: number){
     
     const httpParams = new HttpParams()
-    .set('date', classAttendanceInfo.date)
-    .set('classHistoryId', classAttendanceInfo.classHistoryId);
+    .set('date', date)
+    .set('classHistoryId', classHistoryId.toString());
 
     return this.http.get<ResponseStudentAttendance[]>(`${environment}/getAttendanceList`, {params: httpParams})
   }

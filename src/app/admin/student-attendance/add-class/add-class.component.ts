@@ -104,7 +104,17 @@ export class AddClassComponent implements OnInit{
     if(classHistoryObject){
       const objectString = JSON.stringify(classHistoryObject)
       localStorage.setItem('classAttendanceObject', objectString)
-      this.router.navigate(['/admin/attendance', classHistoryId])
+      this.router.navigate(['/admin/attendance'], {
+        queryParams: { 
+          id:  classHistoryObject.id,
+          day: classHistoryObject.day,
+          date: classHistoryObject.date,
+          center: classHistoryObject.centerName,
+          session: classHistoryObject.session,
+          startTime: classHistoryObject.startTime,
+          endTime: classHistoryObject.endTime
+        }
+      })
     }    
   }
 
